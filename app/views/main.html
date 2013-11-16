@@ -1,9 +1,10 @@
 
-<h1>感情地図</h1>
-<nav role="navigation" class="navbar navbar-default">
-  <ul class="nav navbar-nav">
-    <!--List of cities-->
-    <li><a>test</a></li>
-    <li><a>test2</a></li>
-  </ul>
-</nav>
+<div ng-controller="MainCtrl">
+  <h1>感情地図</h1>
+  <nav role="navigation" class="navbar navbar-default">
+    <ul ng-repeat="city in cities" class="nav navbar-nav">
+      <li ng-class="navClass(city)" ng-click="setCurrent(city)"><a>{{city}}</a></li>
+    </ul>
+  </nav>
+  <div id="map"></div>
+</div>

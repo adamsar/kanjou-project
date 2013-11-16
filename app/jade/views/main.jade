@@ -1,8 +1,8 @@
-h1 感情地図
-nav(class=["navbar", "navbar-default"], role="navigation")
-  ul(class=["nav", "navbar-nav"])
-    //List of cities
-    li
-      a test
-    li
-      a test2
+div(ng-controller="MainCtrl")
+  h1 感情地図
+  nav(class=["navbar", "navbar-default"], role="navigation")
+    ul(class=["nav", "navbar-nav"], ng-repeat="city in cities")
+      li(ng-class="navClass(city)", ng-click="setCurrent(city)")
+         a {{city}}
+
+  #map
