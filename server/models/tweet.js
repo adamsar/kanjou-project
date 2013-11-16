@@ -14,5 +14,4 @@ var EmotionalTweetSchema = mongoose.Schema({
 });
 
 EmotionalTweetSchema.index({location: "2d"});
-
 module.exports = mongoose.model('EmotionalTweet', EmotionalTweetSchema);
