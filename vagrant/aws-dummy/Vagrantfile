@@ -1,0 +1,73 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# http://deferloader.blog.uhuru.co.jp/?p=4025
+# http://deferloader.blog.uhuru.co.jp/?p=4037stf
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "dummy"
+  config.omnibus.chef_version = :latest
+
+  config.berkshelf.enabled = false
+
+  config.vm.provision :chef_solo do |chef|
+    chef.run_list = [
+      "recipe[base]",
+      "recipe[nginx]",
+      "recipe[mongodb::10gen_repo]",
+      "recipe[mongodb]",
+      "recipe[nginx]",
+      "recipe[ruby_build]",
+      "recipe[rbenv::user]",
+      "recipe[redis::install_from_release]",
+      "recipe[nvm]",
+    ]
+
+    chef.cookbooks_path = [ "cookbooks", "site-cookbooks" ]
+
+    chef.json = {
+      redis: {
+        version: "2.6.14",
+        release_url: "http://download.redis.io/releases/redis-:version:.tar.gz"
+      },
+      nvm: {
+        node_versions: ['v0.10.21']
+      },
+      rbenv: {
+        user_installs: [
+          { 'user'    => 'ec2-user',
+            'rubies'  => ['2.0.0-p247'],
+            'global'  => '2.0.0-p247',
+            'gems'    => {
+              '2.0.0-p247'    => [
+                { 'name'    => 'bundler' }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  end
+
+  config.vm.provider :aws do |aws, override|
+    aws.access_key_id     = ENV['AWS_ACCESS_KEY_ID_TC']
+    aws.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY_TC']
+    aws.keypair_name = "techcrunch"
+    aws.instance_type = "m1.large"
+    aws.region = "ap-northeast-1"
+    #aws.ami = "ami-3561fe34"
+    aws.ami = "ami-ef086cee"
+    aws.security_groups = ['techcrunch']
+    aws.tags = {
+      'Name' => 'techcrunch',
+      'Description' => 'for techcrunch'
+    }
+    #aws.user_data = File.read("user_data.txt")
+    override.ssh.username = "ec2-user"
+    override.ssh.private_key_path = "../aws/techcrunch.pem"
+  end
+end
+
