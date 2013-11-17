@@ -20163,24 +20163,7 @@ body {
 }
 
 .tweets svg {
-  width: 60px;
-  height: 20px;
-  padding-right: 100px;
+  width: 300px;
+  height: 40px;
   font: 10px sans-serif;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/andy\/code\/personal\/kanjou-project\/app\/styles\/main\.scss;
-  }
-
-  line {
-    font-family: \00003111;
-  }
-}
-
-.tweets circle {
-  fill: brown;
-  stroke: black;
-  stroke-width: 1.5px;
 }

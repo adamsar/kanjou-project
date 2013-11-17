@@ -31,6 +31,7 @@ angular.module('kanjouMapApp')
 			layer = d3.select(this.getPanes().overlayLayer).
 			    append("div").
 			    attr("class", "tweets");
+
 			overlay.draw = function(){
 			    withProjection(this.getProjection(), function(){
 				var dataPoints = layer.selectAll("svg").
@@ -38,15 +39,30 @@ angular.module('kanjouMapApp')
 				    each(transformCircle).
 				    enter().append("svg:svg").				    
 				    each(transformCircle);
+
 				dataPoints.append("svg:circle").
 				    attr('r', 4.5).
 				    attr('cx', _self.padding).
 				    attr('cy', _self.padding).
-				    attr('fill', 'pink');
+				    attr('fill', 'pink').
+				    attr('stroke-width', '1.5px');
+				
+				dataPoints.append("svg:text").
+				    attr('dy', '1em').
+				    attr('x', _self.padding + 7).
+				    attr('y', _self.padding - 7).
+				    text(function(d){ 
+					var kanjou = [d.kanjoData.joysad, 
+						      d.kanjoData.likedislike, 
+						      d.kanjoData.angerfear];
+					return d.text.substring(0, 7) + "[" + kanjou.join() + "]";
+				    });
+
 			    });
-			}			
-		    }		    
+			}		    
+		    }
 		}
 	    }
 	}
     });
+	      
