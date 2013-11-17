@@ -3,8 +3,8 @@
   <h1>感情地図</h1>
   <nav role="navigation" class="navbar navbar-default">
     <ul ng-repeat="city in cities" class="nav navbar-nav">
-      <li ng-class="navClass(city)" ng-click="setCurrent(city)"><a>{{city}}</a></li>
+      <li ng-class="navClass(city)" ng-click="setCurrent(city)"><a>{{city.name}}</a></li>
     </ul>
   </nav>
-  <div id="map"></div>
+  <div id="map" google-map="google-map" ng-model="currentCity"></div>
 </div>

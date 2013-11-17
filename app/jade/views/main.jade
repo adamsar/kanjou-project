@@ -3,6 +3,6 @@ div(ng-controller="MainCtrl")
   nav(class=["navbar", "navbar-default"], role="navigation")
     ul(class=["nav", "navbar-nav"], ng-repeat="city in cities")
       li(ng-class="navClass(city)", ng-click="setCurrent(city)")
-         a {{city}}
+         a {{city.name}}
 
-  #map
+  #map(google-map, ng-model="currentCity")
