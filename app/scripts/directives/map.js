@@ -7,7 +7,7 @@ angular.module('kanjouMapApp')
 	    scope: {
 		ngModel: "="
 	    },
-	    controller: function($scope){
+	    controller: function($scope, geoEmotion, mapD3){
 		$scope.bindCity = function(city, element){
 		    $scope.map = new google.maps.Map(
 			d3.select(element[0]).node(), {
@@ -16,6 +16,15 @@ angular.module('kanjouMapApp')
 			    mapTypeId: google.maps.MapTypeId.TERRAIN
 			});
 		};
+
+		$scope.$watch('map', function(newMap){		    
+		    geoEmotion.entries($scope.ngModel.latlon, function(data){
+			var overlay = new google.maps.OverlayView();
+			mapD3.setData(overlay, data);			
+			overlay.setMap(newMap);
+		    });
+		});
+
 	    },
 	    link: function(scope, iElement, iAttrs, ctrl){
 		scope.bindCity(scope.ngModel, iElement);
