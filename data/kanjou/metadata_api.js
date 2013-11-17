@@ -8,10 +8,16 @@ module.exports = {
 	http.get(util.format(endpoint, config.kanjou_key, text), function(res){
 	    var body = "";
 	    res.on('data', function(chunk){ body += chunk; });
-	    res.on('end', function(){ handler(JSON.parse(body)); });
-	}).on('error', function(error){
-	    console.info("Error with kanjou lookup: " + error);
+	    res.on('error', function(error){ console.info(error); });
+	    res.on('end', function(){ 
+		try{
+		    var data = JSON.parse(body);
+		    handler(data); 
+		}catch(err){
+		    console.info(err)
+		}
+
+	    });
 	});
     }
 };
-
