@@ -8,9 +8,10 @@ angular.module('kanjouMapApp')
 	function transformCircle(data){
 	    var mapPoint = new google.maps.LatLng(data.location[0], data.location[1]);
 	    mapPoint = _self.projection.fromLatLngToDivPixel(mapPoint);
-	    return d3.select(this)
-		.style("left", (mapPoint.x - this.padding) + "px")
-		.style("top", (mapPoint.y - this.padding) + "px");
+	    d3.select(this).
+		style("left", (mapPoint.x - _self.padding) + "px").
+		style("top", (mapPoint.y - _self.padding) + "px");
+	    return this;
 	}
 
 	function withProjection(projection, cb){
@@ -35,7 +36,7 @@ angular.module('kanjouMapApp')
 				var dataPoints = layer.selectAll("svg").
 				    data(data).
 				    each(transformCircle).
-				    enter().append("svg:svg").
+				    enter().append("svg:svg").				    
 				    each(transformCircle);
 				dataPoints.append("svg:circle").
 				    attr('r', 4.5).
