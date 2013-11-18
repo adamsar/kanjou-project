@@ -3,6 +3,7 @@ angular.module('kanjouMapApp')
 	var _self = this;
 	function basicColor(color){
 	    if(color == 'anger'){
+		return d3.rgb('red');
 	    }else if(color == 'like'){
 		return d3.rgb('blue');
 	    }else if(color == 'joy'){
@@ -91,7 +92,6 @@ angular.module('kanjouMapApp')
 	    	    add(normalize(getColor(emotion, kanjo[emotion]), kanjo[emotion]));
 	    	}
 	    }
-	    console.debug(base);
 	    return base;
 	}
 
@@ -99,7 +99,6 @@ angular.module('kanjouMapApp')
 	    return {
 		setData: function(overlay, data){
 		    data = _.filter(data, function(item){ return !_.isEmpty(item.kanjoData); });
-		    console.info(data);
 		    overlay.onAdd = function() {
 			var layer = null,
 			    dataPoints = null;
@@ -122,16 +121,16 @@ angular.module('kanjouMapApp')
 					attr('cy', _self.padding).
 				    attr('fill', function(item){ return kanjoToColor(item.kanjoData);});
 				    
-				    dataPoints.append("svg:text").
-					attr('dy', '1em').
-					attr('x', _self.padding + 7).
-					attr('y', _self.padding - 7).
-					text(function(d){ 
-					    var kanjou = [d.kanjoData.joysad, 
-							  d.kanjoData.likedislike, 
-							  d.kanjoData.angerfear];
-					    return d.text.substring(0, 7) + "[" + kanjou.join() + "]";
-					});
+				    // dataPoints.append("svg:text").
+				    // 	attr('dy', '1em').
+				    // 	attr('x', _self.padding + 7).
+				    // 	attr('y', _self.padding - 7).
+				    // 	text(function(d){ 
+				    // 	    var kanjou = [d.kanjoData.joysad, 
+				    // 			  d.kanjoData.likedislike, 
+				    // 			  d.kanjoData.angerfear];
+				    // 	    return "[" + kanjou.join() + "]";
+				    // 	});
 			    });
 			}		    
 		    }

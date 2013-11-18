@@ -394,6 +394,11 @@ module.exports = function (grunt) {
           server: require('path').resolve('./server/main')
         }
       }
+    },
+    execute: {
+	twitter: {
+	    src: ["data/twitter/streamer.js"]
+	}
     }
   });
 
@@ -441,4 +446,6 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+   
+    grunt.registerTask('data', ['execute']);
 };
