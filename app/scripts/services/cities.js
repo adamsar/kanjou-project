@@ -6,8 +6,9 @@ angular.module('kanjouMapApp')
 	{name: '大阪',
 	 latlon: [34.67075, 135.4978]},
 	{name: '広島',
-	 latlon: [35.95, 136.18]},
+	 latlon: [34.3853, 132.4553]},
 	{name: '札幌',
 	 latlon: [43.0686, 141.3508]},
 	{name: '福岡',
-	 latlon: [33.5844, 130.4517]}]);
+	 latlon: [33.5844, 130.4517]}]
+	     );

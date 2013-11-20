@@ -1,7 +1,8 @@
 'use strict';
 angular.module('kanjouMapApp')
     .factory('geoEmotion', function($http){
-	var endpointBase = "/data/"
+	console.debug("geo");
+	var endpointBase = "/data/";
 	return {
 	    entries: function(latlon, cb){
 		var url = endpointBase + latlon.join();

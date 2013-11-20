@@ -14,6 +14,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory-->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="bower_components/nvd3/nv.d3.min.css">
     <!-- endbuild-->
   </head>
   <body ng-app="kanjouMapApp"><!--[if lt IE 7]>
@@ -22,8 +23,22 @@
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
-    <!-- Add your site or application content here-->
-    <div ng-view class="container"></div>
+    <!-- Add your site or application content here    -->
+    <div class="container">
+      <div ng-controller="MainCtrl">
+        <h1>感情地図</h1>
+        <nav role="navigation" class="navbar navbar-default">
+          <ul ng-repeat="city in cities" class="nav navbar-nav">
+            <li ng-class="navClass(city)" ng-click="setCurrent(city)"><a>{{city.name}}</a></li>
+          </ul>
+          <ul class="nav pull-right navbar-nav">
+            <li><a href="#/map">地図</a></li>
+            <li><a href="#/tweet">ツイーット</a></li>
+          </ul>
+        </nav>
+        <div id="main" ng-view></div>
+      </div>
+    </div>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.-->
     <script>
       var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
@@ -55,16 +70,20 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <!-- endbuild-->
     <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/nvd3/nv.d3.min.js"></script>
     <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-    <!-- build:js({.tmp,app}) scripts/sc-->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/services/colors.js"></script>
+    <script src="scripts/services/cities.js"></script>
+    <script src="scripts/services/map_d3.js"></script>
+    <script src="scripts/services/emotion.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/map.js"></script>
+    <script src="scripts/controllers/tweet.js"></script>
+    <script src="scripts/directives/map.js"></script>
+    <script src="scripts/directives/graph.js"></script>
+    <script src="scripts/directives/tweet_box.js"></script>
+    <!-- endbuild-->
   </body>
 </html>
-<ripts class="js"> 
-  <script src="scripts/app.js"></script>
-  <script src="scripts/controllers/main.js"></script>
-  <script src="scripts/directives/map.js"></script>
-  <script src="scripts/services/map_d3.js"></script>
-  <script src="scripts/services/emotion.js"></script>
-  <script src="scripts/services/cities.js"></script>
-  <!-- endbuild-->
-</ripts>

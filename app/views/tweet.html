@@ -1,0 +1,9 @@
+
+<div ng-model="currentEmotion" ng-init="colors.colorKeys[0]" class="emotion-box">
+  <div ng-repeat="emotion in colors.colorKeys" ng-click="setEmotion(emotion)" class="emotion">
+    <svg class="inline-top">
+      <circle cx="10" r="4.5" cy="10" fill="{{colors.basicColor(emotion).toString()}}"></circle>
+    </svg>{{ emotion }}
+  </div>
+  <div tweet-box="tweet-box" class="tweet-box"></div>
+</div>

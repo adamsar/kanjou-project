@@ -5,6 +5,10 @@
     <ul ng-repeat="city in cities" class="nav navbar-nav">
       <li ng-class="navClass(city)" ng-click="setCurrent(city)"><a>{{city.name}}</a></li>
     </ul>
+    <ul class="nav pull-right navbar-nav">
+      <li><a href="#/map">地図</a></li>
+      <li><a href="#/tweet">ツイーット</a></li>
+    </ul>
   </nav>
-  <div id="map" google-map="google-map" ng-model="currentCity"></div>
+  <div id="main" ng-view="ng-view"></div>
 </div>

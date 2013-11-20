@@ -1,0 +1,6 @@
+#map(google-map)
+
+.widgets(ng-model="currentWidget", ng-init="currentWidget = 'pie'")     
+  #graphs(pie-chart, ng-show="currentWidget=='pie'")
+  .next(ng-click="currentWidget='notPie'")
+    | next!

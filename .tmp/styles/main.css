@@ -20169,3 +20169,34 @@ body {
   color: red;
   font-weight: bold;
 }
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/Users\/andy\/code\/personal\/kanjou-project\/app\/styles\/main\.scss;
+  }
+
+  line {
+    font-family: \00003112;
+  }
+}
+
+.emotion {
+  display: inline;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/Users\/andy\/code\/personal\/kanjou-project\/app\/styles\/main\.scss;
+  }
+
+  line {
+    font-family: \00003116;
+  }
+}
+
+svg.inline-top {
+  width: 15px;
+  height: 15px;
+  display: inline;
+  margin-right: 5px;
+}

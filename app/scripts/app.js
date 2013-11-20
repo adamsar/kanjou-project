@@ -1,17 +1,21 @@
 'use strict';
 
 angular.module('kanjouMapApp', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize'
-])
-  .config(function ($routeProvider) {
+    'ngCookies',
+    'ngResource',
+    'ngSanitize'
+]).config(['$routeProvider', function ($routeProvider) {
+    console.debug('tst');
     $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+	.when('/map', {
+	    templateUrl: 'views/map.html',
+	    controller: 'MapCtrl'
+	})
+	.when('/tweet', {
+	    templateUrl: '/views/tweet.html',
+	    controller: 'TweetCtrl'
+	})
+	.otherwise({
+	    redirectTo: '/map'
+	});
+}]);

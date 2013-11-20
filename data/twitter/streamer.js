@@ -6,9 +6,15 @@ mongoose = require("mongoose"),
 Tweet = require("../../server/models/tweet");
 
 mongoose.connect('mongodb://localhost/tweets');
+function endsWith(str, suffix){
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+}
 
-function validTweet(tweet){
-    return tweet.lang == 'ja' && tweet.text.length > 40;
+function validTweet(tweet){    
+    return (tweet.lang == 'ja' && 
+	    tweet.text.length > 28 && 
+	    !endsWith(tweet.text, "笑") &&
+	    !endsWith(tweet.text, "ww"));
 }
 
 var twit = new twitter({
@@ -18,7 +24,7 @@ var twit = new twitter({
     access_token_secret: config.twitter_token_secret
 });
 
-var japan = '135,30,140,43';
+var japan = '125,27,140,43';
 
 function saveTweet(tweet){
     kanjou_api.getData(tweet.text, function(data){
@@ -50,7 +56,7 @@ function saveTweet(tweet){
     });
 }
 
-twit.stream('filter', {locations: japan}, function(stream){
+twit.stream('filter', {locations: japan, language: 'ja'}, function(stream){
     stream.on('data', function(tweet){
         if(validTweet(tweet)){
             saveTweet(tweet);

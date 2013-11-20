@@ -1,0 +1,6 @@
+
+<div id="map" google-map="google-map"></div>
+<div ng-model="currentWidget" ng-init="currentWidget = 'pie'" class="widgets">    
+  <div id="graphs" pie-chart="pie-chart" ng-show="currentWidget=='pie'"></div>
+  <div ng-click="currentWidget='notPie'" class="next">next!</div>
+</div>
