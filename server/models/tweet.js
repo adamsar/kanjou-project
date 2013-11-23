@@ -6,6 +6,7 @@ var EmotionalTweetSchema = mongoose.Schema({
     profile_name: String,
     location: [],
     profile_pic: String,
+    pic: String,
     kanjoData: {
 	joysad: Number,
 	likedislike: Number,

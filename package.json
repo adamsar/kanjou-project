@@ -44,7 +44,9 @@
         "karma": "~0.10.4",
         "karma-ng-html2js-preprocessor": "~0.1.0",
         "twitter": "latest",
-	"mongoose": "latest"
+	"mongoose": "latest",
+	"underscore": "latest",
+	"moment": "latest"
     },
     "engines": {
         "node": ">=0.8.0"

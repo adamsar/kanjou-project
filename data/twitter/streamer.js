@@ -43,6 +43,10 @@ function saveTweet(tweet){
                         angerfear: data.angerfear
                     }
                 });
+		if(tweet.entities && tweet.entities.media){
+		    tweet_model.pick = tweet.entities.media[0].media_url;
+		    console.info(tweet_model.pick);
+		}
                 tweet_model.save(function(error){
                     if(error){
                         console.info(util.inspect(error));

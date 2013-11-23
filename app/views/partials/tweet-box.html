@@ -1,0 +1,7 @@
+
+<div ng-show="tweets.length == 0" class="panel">ツイートはない</div>
+<div ng-show="currentTweets.length &gt; 0" ng-repeat="tweet in currentTweets" class="media panel panel-primary"><span class="pull-left"> <img src="{{tweet.profile_pic}}" class="media-object"/></span>
+  <div class="media-body">
+    <h4 class="media-heading">{{tweet.name}}</h4>{{tweet.text}}
+  </div>
+</div>

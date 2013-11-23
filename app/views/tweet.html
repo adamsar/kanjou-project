@@ -3,7 +3,7 @@
   <div ng-repeat="emotion in colors.colorKeys" ng-click="setEmotion(emotion)" class="emotion">
     <svg class="inline-top">
       <circle cx="10" r="4.5" cy="10" fill="{{colors.basicColor(emotion).toString()}}"></circle>
-    </svg>{{ emotion }}
+    </svg><strong ng-show="emotion == currentEmotion">{{ emotion }}</strong><span ng-show="emotion != currentEmotion">{{ emotion }}</span>
   </div>
   <div tweet-box="tweet-box" class="tweet-box"></div>
 </div>

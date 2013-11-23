@@ -1,0 +1,10 @@
+div(ng-show="tweets.length == 0", class='panel')
+  ツイートはない
+div(ng-show="currentTweets.length > 0", 
+  ng-repeat="tweet in currentTweets", 
+  class=['media', 'panel', 'panel-primary'])
+  span.pull-left 
+    img(class="media-object",  src="{{tweet.profile_pic}}")
+  div.media-body
+    h4.media-heading {{tweet.name}}
+    {{tweet.text}}

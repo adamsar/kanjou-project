@@ -55,36 +55,69 @@ angular.module('kanjouMapApp')
             return base;
         }
 
-        return {
-            setData: function(overlay, data){
-                data = _.filter(data, function(item){ return !_.isEmpty(item.kanjoData); });
-                overlay.onRemove = function() {
-                    $(this).find("div").remove();
-                }
-                overlay.onAdd = function() {
-                    var layer = null,
-                    dataPoints = null;
+	return {
+	    buildInitial: function(overlay, data){
+		var layer = null;
+		overlay.onRemove = function(){
+		    //Get data points, transition out slowly
+		    d3.select(layer)
+			.data([])
+			.exit()
+			.remove();
+		};
+		
+		overlay.onAdd = function(){
+		    //Add an encompassing div for all tweets that are contained
+		    var layer = d3.select(this.getPanes().overlayLayer)
+			.append("div")
+			.attr("class", "tweets");
+		    
+		    this.draw = function(){
+			withProjection(this.getProjection(), function(){
+			    console.debug("drawing");
+			    //Add in all tweet dots, colorize them, put them on the projection
+			    layer.selectAll("svg")
+				.data(data)
+				.enter()
+				.append("svg:svg")
+				.each(transformCircle)
+				    .append("svg:circle")
+				.attr('r', 3)
+				.attr('cx', _self.padding)
+				.attr('cy', _self.padding)
+				.attr('fill', function(item, index){
+				    return kanjoToColor(item.kanjoData);
+				});
+			});
+		    };
+		}
+	    },
+	    
+	    updateData: function(overlay, data){
+		console.debug("updating with ");
+		console.debug(data);
+		withProjection(overlay.getProjection(), function(){
+		    //Update all circles, append new ones
+		    //TODO: exits should be removed wisely
+		    var svgs = d3.select("div.tweets")
+			.selectAll("svg")
+			.data(data, function(item){ return item._id; })
 
-                    layer = d3.select(this.getPanes().overlayLayer).
-                        append("div").
-                        attr("class", "tweets");
-
-                    overlay.draw = function(){
-                        withProjection(this.getProjection(), function(){
-                            var dataPoints = layer.selectAll("svg").
-                                data(data).
-                                each(transformCircle).
-                                enter().append("svg:svg").
-                                each(transformCircle);
-
-                            dataPoints.append("svg:circle").
-                                attr('r', 4.5).
-                                attr('cx', _self.padding).
-                                attr('cy', _self.padding).
-                                attr('fill', function(item){ return kanjoToColor(item.kanjoData);});
-                        });
-                    }
-                }
-            }
-	};	
+		    svgs.each(transformCircle)
+			    .select("circle")
+			.attr('r', 3)
+			.attr('cx', _self.padding)
+			.attr('cy', _self.padding)
+			.attr('fill', function(item){
+			    return kanjoToColor(item.kanjoData);
+			});
+		    svgs.enter()
+			.append("svg")
+			.append("circle");
+		    svgs.exit()
+		    .transition()
+		    .remove();
+		});
+	    }	    
+	};
     });

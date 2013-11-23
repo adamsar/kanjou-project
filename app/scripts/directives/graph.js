@@ -63,8 +63,9 @@ angular.module('kanjouMapApp')
 		    });
                 }
 
-                $scope.$watch('data', function(){
+                $scope.$on('dataRefreshed', function(){
 		    //Only build if this is currently showing
+		    console.debug("building");
 		    if($scope.currentWidget == 'pie'){
 			$scope.buildGraph();
 		    }
