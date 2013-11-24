@@ -1,8 +1,8 @@
 .emotion-box(ng-model="currentEmotion", ng-init="colors.colorKeys[0]")
-  .emotion(ng-repeat="emotion in colors.colorKeys", ng-click="setEmotion(emotion)")
+  .emotion(ng-repeat="emotion in colors.colorDisplay", ng-click="setEmotion(emotion.key)")
     svg.inline-top
-      circle(cx="10", r="4.5", cy="10", fill="{{colors.basicColor(emotion).toString()}}")
-    strong(ng-show="emotion == currentEmotion") {{ emotion }}
-    span(ng-show="emotion != currentEmotion") {{ emotion }}
+      circle(cx="10", r="4.5", cy="10", fill="{{colors.basicColor(emotion.key).toString()}}")
+    strong(ng-show="emotion.key == currentEmotion") {{ emotion.value }}
+    span(ng-show="emotion.key != currentEmotion") {{ emotion.value }}
 
   .tweet-box(tweet-box)

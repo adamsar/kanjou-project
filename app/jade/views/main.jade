@@ -5,9 +5,9 @@ div(ng-controller="MainCtrl")
       li(ng-class="navClass(city)", ng-click="setCurrent(city)")
          a {{city.name}}
     ul(class=["nav", "pull-right", "navbar-nav"])
-      li
+      li(ng-class="{'active': page == 'map'}")
         a(href="#/map") 地図
-      li
+      li(ng-class="{'active': page == 'tweet'}")
         a(href="#/tweet") ツイーット
 
   #main(ng-view)

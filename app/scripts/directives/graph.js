@@ -5,7 +5,6 @@ angular.module('kanjouMapApp')
             template: "<div class='graph'><svg height='500'><svg></div>",
 	    scope: true,
             controller: function($scope, colors){
-		console.debug("pie");
                 $scope.parseData = function(data){
                     var parsed = {
                         like: 0,
@@ -65,16 +64,17 @@ angular.module('kanjouMapApp')
 
                 $scope.$on('dataRefreshed', function(){
 		    //Only build if this is currently showing
-		    console.debug("building");
 		    if($scope.currentWidget == 'pie'){
 			$scope.buildGraph();
 		    }
-
 		});
             },
 
             link: function(scope, iElement, iAttrs, ctrl){
 		scope.pieElement = iElement[0];
+		if(scope.started){
+		    scope.buildGraph();
+		}
             }
         };
     });

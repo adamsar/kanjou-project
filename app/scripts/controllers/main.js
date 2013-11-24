@@ -6,6 +6,7 @@ angular.module('kanjouMapApp')
       $scope.data = [];
       $scope.currentCity = cities[0];
       $scope.started = false;
+      $scope.page = 'page';
       $scope.navClass = function(city){
 	  return $scope.currentCity == city?'active':'';
       };
@@ -45,7 +46,7 @@ angular.module('kanjouMapApp')
 	  if(updateInterval){
 	      clearInterval(updateInterval);
 	  }
-
+	  $scope.started = false;
 	  _.each(_.range(0, 1000, 100), function(index){
 	      geoEmotion.entries($scope.currentCity.latlon, 
 				 {limit: 100, start: index},
@@ -55,11 +56,12 @@ angular.module('kanjouMapApp')
 					 if($scope.data.length == 1000){
 					     console.debug("dataRefreshed");
 					     $scope.$broadcast("dataRefreshed");
-					     $scope.started = true;
 					     updateInterval = setInterval($scope.updateData, 5000);
+					     $scope.started = true;
 					 }
-				     })
+				     });
 		});
+	     
 	  });
       }
       bootstrapData();

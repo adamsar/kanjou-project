@@ -6,8 +6,8 @@
       <li ng-class="navClass(city)" ng-click="setCurrent(city)"><a>{{city.name}}</a></li>
     </ul>
     <ul class="nav pull-right navbar-nav">
-      <li><a href="#/map">地図</a></li>
-      <li><a href="#/tweet">ツイーット</a></li>
+      <li ng-class="{'active': page == 'map'}"><a href="#/map">地図</a></li>
+      <li ng-class="{'active': page == 'tweet'}"><a href="#/tweet">ツイーット</a></li>
     </ul>
   </nav>
   <div id="main" ng-view="ng-view"></div>

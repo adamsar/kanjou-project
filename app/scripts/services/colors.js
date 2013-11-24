@@ -55,6 +55,33 @@ angular.module('kanjouMapApp')
                 return this.basicColor(this.getEmotionName(kanjoName, value));
             },
 
-            colorKeys: ['anger', 'fear', 'joy', 'sad', 'like', 'dislike']
+            colorKeys: ['anger', 'fear', 'joy', 'sad', 'like', 'dislike'],
+	    colorDisplay: [
+		{
+		    key: 'anger',
+		    value: '怒り'
+		},
+		{			       
+		    key: 'joy',
+		    value: '喜び'
+		},
+		{
+		    key: 'sad',
+		    value: '悲しみ'
+		},
+		{
+		    key: 'like',
+		    value: '好き'
+		},
+		{
+		    key: 'dislike',
+		    value: '嫌い'
+		},
+		{
+		    key: 'fear',
+		    value: '怖い'
+		}
+	    ]
+		    
         };
     });

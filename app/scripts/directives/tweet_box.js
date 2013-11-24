@@ -42,6 +42,9 @@ angular.module('kanjouMapApp')
 		    $scope.currentTweets = $scope.tweets[$scope.currentEmotion];
 		});
 		$scope.currentTweets = $scope.tweets[$scope.currentEmotion];
+		if($scope.started){
+		    $scope.organizeTweets();
+		}
 	    }
 	};
     });

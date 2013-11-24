@@ -37,23 +37,25 @@ angular.module('kanjouMapApp')
 		    }
 		});
 		
-		$scope.$on("dataRefreshed", function(){
-		    console.info("refreshed");
+                $scope.$on('dataRefreshed', function(){
+		    console.debug("applying data");
 		    $scope.applyData();
 		});
 		
 		$scope.applyData = function(){
+		    console.debug("applyData");
 		    $scope.mapData = _.chain($scope.data)
 			.filter(validData)
 			.map(transformItem)
 			.value();
 		    $scope.overlay = new google.maps.OverlayView();		    
 		    mapD3.buildInitial($scope.overlay, $scope.mapData);
-		    setTimeout(function(){$scope.overlay.setMap($scope.map);}, 1000);
+		    $scope.overlay.setMap($scope.map);
+		    console.debug($scope.map);
 		}
 		
 		$scope.buildMap = function(){
-		    console.debug("buildmap");
+		    console.info("buildMap");
 		    if($scope.overlay){
 			$scope.overlay.setMap(null);
 			$scope.overlay = null;
@@ -65,7 +67,7 @@ angular.module('kanjouMapApp')
 			    center: new google.maps.LatLng($scope.currentCity.latlon[0], 
 							   $scope.currentCity.latlon[1]),
 			    mapTypeId: google.maps.MapTypeId.TERRAIN
-			}
+			}			
 		    );
 		}
 		
