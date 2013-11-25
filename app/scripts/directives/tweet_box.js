@@ -15,7 +15,6 @@ angular.module('kanjouMapApp')
 		blankTweets();
 		
 		$scope.organizeTweets = function(){
-		    console.debug("organizing");
 		    _.each($scope.data, function(item){
 			var strongest = colors.getStrongest(item.kanjoData);
 			var key = colors.getEmotionName(strongest, item.kanjoData[strongest]);

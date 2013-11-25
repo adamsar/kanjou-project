@@ -3,7 +3,8 @@
 angular.module('kanjouMapApp', [
     'ngCookies',
     'ngResource',
-    'ngSanitize'
+    'ngSanitize',
+    'geolocation'
 ]).config(['$routeProvider', function ($routeProvider) {
     console.debug('tst');
     $routeProvider

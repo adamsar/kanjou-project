@@ -3,6 +3,6 @@
     svg.inline-top
       circle(cx="10", r="4.5", cy="10", fill="{{colors.basicColor(emotion.key).toString()}}")
     strong(ng-show="emotion.key == currentEmotion") {{ emotion.value }}
-    span(ng-show="emotion.key != currentEmotion") {{ emotion.value }}
+    span(ng-show="emotion.key != currentEmotion", class="clickable") {{ emotion.value }}
 
   .tweet-box(tweet-box)

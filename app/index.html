@@ -28,8 +28,9 @@
       <div ng-controller="MainCtrl">
         <h1>感情地図</h1>
         <nav role="navigation" class="navbar navbar-default">
-          <ul ng-repeat="city in cities" class="nav navbar-nav">
-            <li ng-class="navClass(city)" ng-click="setCurrent(city)"><a>{{city.name}}</a></li>
+          <ul class="nav navbar-nav">
+            <li ng-repeat="city in cities" ng-class="navClass(city)" ng-click="setCurrent(city)"><a>{{city.name}}</a></li>
+            <li ng-class="{'active': geolocated==true}" ng-click="switchToGeoLocation()"><a>現在地</a></li>
           </ul>
           <ul class="nav pull-right navbar-nav">
             <li ng-class="{'active': page == 'map'}"><a href="#/map">地図</a></li>
@@ -68,6 +69,7 @@
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="https://rawgithub.com/arunisrael/angularjs-geolocation/master/dist/angularjs-geolocation.min.js"></script>
     <script src="scripts/lib/cbuffer.js"></script>
     <!-- endbuild-->
     <script src="bower_components/d3/d3.js"></script>

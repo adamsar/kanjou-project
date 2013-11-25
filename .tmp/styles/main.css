@@ -20214,3 +20214,17 @@ svg.inline-top {
 .panel.media {
   padding: 10px;
 }
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/Users\/andy\/code\/personal\/kanjou-project\/app\/styles\/main\.scss;
+  }
+
+  line {
+    font-family: \00003127;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}

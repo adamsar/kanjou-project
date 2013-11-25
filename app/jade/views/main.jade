@@ -1,9 +1,11 @@
 div(ng-controller="MainCtrl")
   h1 感情地図
   nav(class=["navbar", "navbar-default"], role="navigation")
-    ul(class=["nav", "navbar-nav"], ng-repeat="city in cities")
-      li(ng-class="navClass(city)", ng-click="setCurrent(city)")
+    ul(class=["nav", "navbar-nav"])
+      li(ng-repeat="city in cities", ng-class="navClass(city)", ng-click="setCurrent(city)")
          a {{city.name}}
+      li(ng-class="{'active': geolocated==true}", ng-click="switchToGeoLocation()")
+        a 現在地
     ul(class=["nav", "pull-right", "navbar-nav"])
       li(ng-class="{'active': page == 'map'}")
         a(href="#/map") 地図

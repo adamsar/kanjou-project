@@ -1,6 +1,6 @@
 'use strict';
 angular.module('kanjouMapApp')
-  .controller('MainCtrl', function ($scope, cities, geoEmotion, colors) {
+  .controller('MainCtrl', function ($scope, cities, geoEmotion, colors, geolocation) {
       var updateInterval = null;
       $scope.cities = cities;
       $scope.data = [];
@@ -10,15 +10,25 @@ angular.module('kanjouMapApp')
       $scope.navClass = function(city){
 	  return $scope.currentCity == city?'active':'';
       };
+      $scope.geolocated = false;
 
       $scope.setCurrent = function(city){
-	  if(!_.isEqual($scope.currentCity,city)){
+	  $scope.geolocated = !_.contains(cities, city);
+	  if(!_.isEqual($scope.currentCity, city)){
 	      $scope.currentCity = city;
 	      $scope.data = [];
-	      console.debug("data blank");
 	      $scope.$broadcast("dataBlank");
 	      bootstrapData();
 	  }
+      }
+      
+      $scope.switchToGeoLocation = function(){
+	  $scope.setCurrent({name: '現在地', latlon: []});
+	  geolocation.getLocation().then(function(data){
+	      $scope.setCurrent({
+		  name: '現在地', 
+		  latlon: [data.coords.latitude, data.coords.longitude]});
+	  });
       }
 
       $scope.updateData = function(){
