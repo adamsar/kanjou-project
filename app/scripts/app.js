@@ -4,9 +4,9 @@ angular.module('kanjouMapApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
-    'geolocation'
+    'geolocation',
+    'ui.bootstrap'
 ]).config(['$routeProvider', function ($routeProvider) {
-    console.debug('tst');
     $routeProvider
 	.when('/map', {
 	    templateUrl: 'views/map.html',

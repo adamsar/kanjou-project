@@ -1,7 +1,16 @@
 
 <div ng-show="tweets.length == 0" class="panel">ツイートはない</div>
-<div ng-show="currentTweets.length &gt; 0" ng-repeat="tweet in currentTweets" class="media panel panel-primary"><span class="pull-left"> <img src="{{tweet.profile_pic}}" class="media-object"/></span>
+<div ng-show="currentTweets.length &gt; 0" ng-repeat="tweet in currentTweets | limitTo:5" class="media panel panel-primary"><span class="pull-left"> <img src="{{tweet.profile_pic}}" class="media-object"/></span>
   <div class="media-body">
     <h4 class="media-heading">{{tweet.name}}</h4>{{tweet.text}}
   </div>
 </div>
+<div class="carousol"></div>
+<carousol>
+  <slide ng-repeat="slide in currentTweets | filter:{pic: '!!'}" active="slide.active"><img ng-src="slide.image" style="margin:auto;"/>
+    <div class="carousol-caption">
+      <h4>{{slide.name}}</h4>
+      <p>{{slide.text}}</p>
+    </div>
+  </slide>
+</carousol>

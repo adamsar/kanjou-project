@@ -1,9 +1,9 @@
 var util = require("util"),
-config = require("../../config"),
-twitter = require("twitter"),
-kanjou_api = require("../kanjou/metadata_api"),
-mongoose = require("mongoose"),
-Tweet = require("../../server/models/tweet");
+    config = require("../../config"),
+    twitter = require("twitter"),
+    kanjou_api = require("../kanjou/metadata_api"),
+    mongoose = require("mongoose"),
+    Tweet = require("../../server/models/tweet");
 
 mongoose.connect('mongodb://localhost/tweets');
 function endsWith(str, suffix){
