@@ -6,6 +6,7 @@ var util = require("util"),
     Tweet = require("../../server/models/tweet");
 
 mongoose.connect('mongodb://localhost/tweets');
+
 function endsWith(str, suffix){
     return str.indexOf(suffix, str.length - suffix.length) !== -1;
 }
@@ -28,13 +29,19 @@ var japan = '125,27,140,43';
 
 function saveTweet(tweet){
     kanjou_api.getData(tweet.text, function(data){
+        var pic = null;
         if(data.joysad != 0 || data.likedislike != 0 || data.angerfear != 0){
             try{
+                if(tweet.entities && tweet.entities.media){
+                    pic = tweet.entities.media[0].media_url; //Twit-pics
+                    console.info(pic);
+                }
                 var tweet_model = new Tweet({
                     user_id: tweet.user.id_str,
                     name: tweet.user.name,
                     profile_name: tweet.user.screen_name,
                     text: tweet.text,
+                    pic: pic,
                     location: tweet.geo.coordinates,
                     profile_pic: tweet.user.profile_image_url,
                     kanjoData: {
@@ -43,10 +50,7 @@ function saveTweet(tweet){
                         angerfear: data.angerfear
                     }
                 });
-		if(tweet.entities && tweet.entities.media){
-		    tweet_model.pick = tweet.entities.media[0].media_url;
-		    console.info(tweet_model.pick);
-		}
+
                 tweet_model.save(function(error){
                     if(error){
                         console.info(util.inspect(error));

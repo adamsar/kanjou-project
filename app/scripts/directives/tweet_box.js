@@ -18,11 +18,13 @@ angular.module('kanjouMapApp')
 		    _.each($scope.data, function(item){
 			var strongest = colors.getStrongest(item.kanjoData);
 			var key = colors.getEmotionName(strongest, item.kanjoData[strongest]);
-			$scope.tweets[key].push({_id: item._id,
-						 name: item.name, 
-						 text: item.text, 
-						 profile_pic: item.profile_pic,
-						 value: Math.abs(item.kanjoData[strongest])});			
+			$scope.tweets[key].push({
+                _id: item._id,
+				name: item.name,
+	    		text: item.text,
+				profile_pic: item.profile_pic,
+                pic: item.pic,
+				value: Math.abs(item.kanjoData[strongest])});
 		    });
 		    _.each(colors.colorKeys, function(emotion){
 			$scope.tweets[emotion] = _.sortBy($scope.tweets[emotion], 
@@ -30,6 +32,10 @@ angular.module('kanjouMapApp')
 							      return tweet._id;
 							  });			
 		    });
+            console.debug(_.filter($scope.tweets['joy'], function(tweet){
+                return tweet.pic != null;
+            })
+            );
 		    $scope.$broadcast("tweetChange");
 		}
 		$scope.$on("dataBlank", blankTweets);
