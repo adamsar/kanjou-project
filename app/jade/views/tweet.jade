@@ -5,4 +5,10 @@
     strong(ng-show="emotion.key == currentEmotion") {{ emotion.value }}
     span(ng-show="emotion.key != currentEmotion", class="clickable") {{ emotion.value }}
 
-  .tweet-box(tweet-box)
+.tweet-box(tweet-box, tweets="currentTweets")
+carousel
+    slide(ng-repeat="tweet in currentTweets|filter:{pic: '!!'}", active="slide.active")
+        img(ng-src="{{tweet.pic}}", style="margin:auto;")
+        .carousel-caption
+            h4 {{tweet.name}}
+            p {{tweet.text}}

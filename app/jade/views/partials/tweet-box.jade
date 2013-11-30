@@ -1,18 +1,10 @@
 div(ng-show="tweets.length == 0", class='panel')
   ツイートはない
-div(ng-show="currentTweets.length > 0", 
-  ng-repeat="tweet in currentTweets | limitTo:5", 
+div(ng-show="tweets.length > 0",
+  ng-repeat="tweet in tweets | limitTo:5",
   class=['media', 'panel', 'panel-primary'])
-  span.pull-left 
+  span.pull-left
     img(class="media-object",  src="{{tweet.profile_pic}}")
   div.media-body
     h4.media-heading {{tweet.name}}
     {{tweet.text}}
-div.carousol
-carousol
-  slide(ng-repeat="slide in currentTweets | filter:{pic: '!!'}", active="slide.active")
-    img(ng-src="slide.image", style="margin:auto;")
-    .carousol-caption
-      h4 {{slide.name}}
-      p {{slide.text}}
-    

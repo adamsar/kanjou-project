@@ -5,5 +5,13 @@
       <circle cx="10" r="4.5" cy="10" fill="{{colors.basicColor(emotion.key).toString()}}"></circle>
     </svg><strong ng-show="emotion.key == currentEmotion">{{ emotion.value }}</strong><span ng-show="emotion.key != currentEmotion" class="clickable">{{ emotion.value }}</span>
   </div>
-  <div tweet-box="tweet-box" class="tweet-box"></div>
 </div>
+<div tweet-box="tweet-box" tweets="currentTweets" class="tweet-box"></div>
+<carousel>
+  <slide ng-repeat="tweet in currentTweets|filter:{pic: '!!'}" active="slide.active"><img ng-src="{{tweet.pic}}" style="margin:auto;"/>
+    <div class="carousel-caption">
+      <h4>{{tweet.name}}</h4>
+      <p>{{tweet.text}}</p>
+    </div>
+  </slide>
+</carousel>
