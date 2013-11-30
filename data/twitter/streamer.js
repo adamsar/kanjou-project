@@ -64,8 +64,8 @@ function saveTweet(tweet){
   });
 }
 
-while(true){
-  try{
+function doStream(){
+try{
     twit.stream('filter', {locations: japan, language: 'ja'}, function(stream){
       stream.on('data', function(tweet){
         if(validTweet(tweet)){
@@ -80,6 +80,8 @@ while(true){
     });
   }catch(err){
     console.info(err);
-    continue;
+    doStream();
   }
 }
+
+doStream();
