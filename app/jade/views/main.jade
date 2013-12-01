@@ -1,15 +1,22 @@
 div(ng-controller="MainCtrl")
   h1 感情地図
-  nav(class=["navbar", "navbar-default"], role="navigation")
-    ul(class=["nav", "navbar-nav"])
-      li(ng-repeat="city in cities", ng-class="navClass(city)", ng-click="setCurrent(city)")
-         a {{city.name}}
-      li(ng-class="{'active': geolocated==true}", ng-click="switchToGeoLocation()")
-        a 現在地
-    ul(class=["nav", "pull-right", "navbar-nav"])
-      li(ng-class="{'active': page == 'map'}")
-        a(href="#/map") 地図
-      li(ng-class="{'active': page == 'tweet'}")
-        a(href="#/tweet") ツイーット
+  div(class=["navbar", "navbar-default"])
+      .container
+        a.navbar-brand {{currentCity.name}}
+        button(type='button', class='navbar-toggle', data-toggle='collapse', data-target='.navbar-responsive-collapse')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        div(class=["navbar-collapse", "collapse", "navbar-responsive-collapse"])
+            ul(class=["nav", "navbar-nav"])
+                li(ng-repeat="city in cities", ng-class="navClass(city)", ng-click="setCurrent(city)")
+                    a {{city.name}}
+                li(ng-class="{'active': geolocated==true}", ng-click="switchToGeoLocation()")
+                    a 現在地
+            ul(class=["pull-right", "nav", "navbar-nav"])
+                li(ng-class="{'active': page == 'map'}")
+                    a(href="#/map") 地図
+                li(ng-class="{'active': page == 'tweet'}")
+                    a(href="#/tweet") ツイーット
 
   #main(ng-view)
