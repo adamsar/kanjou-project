@@ -8,7 +8,7 @@
 </div>
 <div tweet-box="tweet-box" tweets="currentTweets" class="tweet-box"></div>
 <carousel>
-  <slide ng-repeat="tweet in currentTweets|filter:{pic: '!!'}" active="slide.active"><img ng-src="{{tweet.pic}}" style="margin:auto;"/>
+  <slide ng-repeat="tweet in currentTweets|filter:{pic: '!!'} | limitTo:8" active="slide.active"><img ng-src="{{tweet.pic}}" style="margin:auto;"/>
     <div class="carousel-caption">
       <h4>{{tweet.name}}</h4>
       <p>{{tweet.text}}</p>

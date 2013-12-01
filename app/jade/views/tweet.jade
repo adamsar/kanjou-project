@@ -7,7 +7,7 @@
 
 .tweet-box(tweet-box, tweets="currentTweets")
 carousel
-    slide(ng-repeat="tweet in currentTweets|filter:{pic: '!!'}", active="slide.active")
+    slide(ng-repeat="tweet in currentTweets|filter:{pic: '!!'} | limitTo:8", active="slide.active")
         img(ng-src="{{tweet.pic}}", style="margin:auto;")
         .carousel-caption
             h4 {{tweet.name}}
